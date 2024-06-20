@@ -13,12 +13,11 @@ public class Avaliacao {
         System.out.println("Código feito por Henrique da Silva Strada");
         System.out.println("https://github.com/HenriqueStrada");
         while (refazer == 1) {
-            while (pergunta > 3 || pergunta < 1) {
+            while (pergunta > 2 || pergunta < 1) {
                 System.out.println("""
                         Qual atividade você deseja selecionar para correção?
                         Primeira atividade = 1
                         Segunda atividade = 2
-                        Terceira atividade = 3
                         """);
                 pergunta = scr.nextInt();
                 if (pergunta > 3 || pergunta < 1) {
@@ -35,12 +34,6 @@ public class Avaliacao {
             } else if (pergunta == 2){
                 Socios meusSocios = new Socios();
                 meusSocios.executarSocios();
-                System.out.println("Você deseja refazer alguma atividade? (Não = 0 // Sim = 1)");
-                refazer = scr.nextInt();
-                pergunta = 0;
-            } else if (pergunta == 3){
-                Id meusIds = new Id();
-                meusIds.executarId();
                 System.out.println("Você deseja refazer alguma atividade? (Não = 0 // Sim = 1)");
                 refazer = scr.nextInt();
                 pergunta = 0;
@@ -208,131 +201,6 @@ class Socios {
                 break;
             default:
                 System.out.println("Opção inválida.");
-        }
-    }
-}
-
-class Id {
-
-    void executarId(){
-
-        ArrayList<Pessoa> pessoas = new ArrayList<>();
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-
-            System.out.print("ID (0 para parar): ");
-
-            int id = scanner.nextInt();
-
-            if (id == 0) break;
-
-            System.out.print("Nome: ");
-
-            String nome = scanner.next();
-
-            System.out.print("Idade: ");
-
-            int idade = scanner.nextInt();
-
-            System.out.print("Altura: ");
-
-            double altura = scanner.nextDouble();
-
-            System.out.print("Peso: ");
-
-            double peso = scanner.nextDouble();
-
-            Pessoa pessoa = new Pessoa(id, nome, idade, altura, peso);
-
-            pessoas.add(pessoa);
-
-        }
-
-        // Ordenar por ID crescente
-        Collections.sort(pessoas, new Comparator<Pessoa>() {
-            @Override
-            public int compare(Pessoa p1, Pessoa p2) {
-                return Integer.compare(p1.id, p2.id);
-            }
-        });
-
-        System.out.println("Pessoas por ID crescente:");
-
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(pessoa.id + " - " + pessoa.nome);
-        }
-
-        // Ordenar por IMC decrescente
-        Collections.sort(pessoas, new Comparator<Pessoa>() {
-            @Override
-            public int compare(Pessoa p1, Pessoa p2) {
-                return Double.compare(p2.imc, p1.imc);
-            }
-        });
-
-        System.out.println("Pessoas por IMC decrescente:");
-
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(pessoa.imc + " - " + pessoa.nome);
-        }
-
-        // Ordenar por altura crescente
-        Collections.sort(pessoas, new Comparator<Pessoa>() {
-            @Override
-            public int compare(Pessoa p1, Pessoa p2) {
-                return Double.compare(p1.altura, p2.altura);
-            }
-        });
-
-        System.out.println("Pessoas por altura crescente:");
-
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(pessoa.altura + " - " + pessoa.nome);
-        }
-
-        double somaIdade = 0;
-        double somaAltura = 0;
-        double somaPeso = 0;
-        double somaIMC = 0;
-
-        for (Pessoa pessoa : pessoas) {
-            somaIdade += pessoa.idade;
-            somaAltura += pessoa.altura;
-            somaPeso += pessoa.peso;
-            somaIMC += pessoa.imc;
-        }
-
-        int quantidadePessoas = pessoas.size();
-        double mediaIdade = somaIdade / quantidadePessoas;
-        double mediaAltura = somaAltura / quantidadePessoas;
-        double mediaPeso = somaPeso / quantidadePessoas;
-        double mediaIMC = somaIMC / quantidadePessoas;
-
-        System.out.println("Médias:");
-        System.out.println("Idade: " + mediaIdade);
-        System.out.println("Altura: " + mediaAltura);
-        System.out.println("Peso: " + mediaPeso);
-        System.out.println("IMC: " + mediaIMC);
-    }
-class Pessoa {
-    int id;
-    String nome;
-    int idade;
-    double altura;
-    double peso;
-    double imc;
-    public Pessoa(int id, String nome, int idade, double altura, double peso) {
-        this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.altura = altura;
-        this.peso = peso;
-        this.imc = calcularIMC();
-    }
-    private double calcularIMC() {
-        return peso / (altura * altura);
         }
     }
 }
